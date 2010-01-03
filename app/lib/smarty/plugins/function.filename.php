@@ -13,10 +13,10 @@
  */
 function smarty_function_filename($params, $smarty, $template)
 {
-	$url = $params['url'];
-	if ($url==null || $url=='' || strrpos($url, '/')===FALSE) {
-		return $url;
-	}
-	return urldecode(substr($url, strrpos($url, '/') + 1));
+  $url = $params['url'];
+  if ($url==null || $url=='' || strrpos($url, '/')===FALSE) {
+    return $url;
+  }
+  return urldecode(substr($url, strrpos($url, '/') + 1));
 }
 ?>

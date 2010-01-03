@@ -12,7 +12,7 @@ require_once('plugins/modifier.escape.php');
 * @param string $string input string
 */
 function smarty_modifier_e($string) {
-	return smarty_modifier_escape($string, 'htmlall');
+  return smarty_modifier_escape($string, 'htmlall');
 } 
 
 ?>

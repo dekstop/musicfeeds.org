@@ -3,31 +3,31 @@
 
 <style>
 table.log {
-        font-size: 0.8em;
-        border-collapse: collapse;
-        border: 3px solid #cccccc;
-        width: 900px;
+  font-size: 0.8em;
+  border-collapse: collapse;
+  border: 3px solid #cccccc;
+  width: 900px;
 }
 table.log th {
-        border: 1px dotted gray;
-        background-color: #f2f2f2;
-        padding: 4px;
+  border: 1px dotted gray;
+  background-color: #f2f2f2;
+  padding: 4px;
 }       
 table.log td {
-        border: 1px dotted gray;
-        padding: 2px;
+  border: 1px dotted gray;
+  padding: 2px;
 }       
 
 table.log .active {
 }
 table.log .inactive {
-        background: #ffeeee;
+  background: #ffeeee;
 }
 table.log .imported {
-        background: #eeffee;
+  background: #eeffee;
 }
 table.log .date {
-	font-size: 0.8em;
+  font-size: 0.8em;
 }
 table.log .url {
 }
@@ -50,21 +50,21 @@ table.log .url {
 <h2>Recent Imports</h2>
 <table class="log">
 <tr>
-	<th>URL</th>
-	<th>Date Added</th>
-	<th>Last Fetch</th>
-	<th>Last Update</th>
-	<th>Failures</th>
-	<th>Imported?</th>
+  <th>URL</th>
+  <th>Date Added</th>
+  <th>Last Fetch</th>
+  <th>Last Update</th>
+  <th>Failures</th>
+  <th>Imported?</th>
 </tr>
 {foreach from=$batchimports item=item}
 <tr{if $item.active=='t'}{if $item.imported=='t'} class="imported"{else} class="active"{/if}{else} class="inactive"{/if}>
-	<td class="url"><a href="{$item.url|e}">{$item.url|excerpt:$urlExcerptLen}</a></td>
-	<td class="date">{$item.date_added|e}</td>
-	<td class="date">{$item.date_last_fetched|e}</td>
-	<td class="date">{$item.date_modified|e}</td>
-	<td>{$item.fail_count|e}</td>
-	<td>{$item.imported|e}</td>
+  <td class="url"><a href="{$item.url|e}">{$item.url|excerpt:$urlExcerptLen}</a></td>
+  <td class="date">{$item.date_added|e}</td>
+  <td class="date">{$item.date_last_fetched|e}</td>
+  <td class="date">{$item.date_modified|e}</td>
+  <td>{$item.fail_count|e}</td>
+  <td>{$item.imported|e}</td>
 </tr>
 {/foreach}
 </table>
@@ -72,27 +72,27 @@ table.log .url {
 <h2>Failed Updates</h2>
 <table class="log">
 <tr>
-	<th>URL</th>
-	<th>Date Added</th>
-	<th>Last Fetch</th>
-	<th>Last Update</th>
-	<th>Failures</th>
-	<th>http_last_modified</th>
-	<th>etag</th>
-	<th>uid</th>
-	<th>ttl</th>
+  <th>URL</th>
+  <th>Date Added</th>
+  <th>Last Fetch</th>
+  <th>Last Update</th>
+  <th>Failures</th>
+  <th>http_last_modified</th>
+  <th>etag</th>
+  <th>uid</th>
+  <th>ttl</th>
 </tr>
 {foreach from=$failedFeeds item=item}
 <tr{if $item.active=='t'} class="active"{else} class="inactive"{/if}>
-	<td class="url"><a href="{$item.url|e}">{$item.title|excerpt:$titleExcerptLen}</a></td>
-	<td class="date">{$item.date_added|e}</td>
-	<td class="date">{$item.date_last_fetched|e}</td>
-	<td class="date">{$item.date_modified|e}</td>
-	<td>{$item.fail_count|e}</td>
-	<td class="date">{$item.http_last_modified|e}</td>
-	<td>{if $item.http_etag}y{else}n{/if}</td>
-	<td>{$item.unique_id|e}</td>
-	<td>{$item.ttl|e}</td>
+  <td class="url"><a href="{$item.url|e}">{$item.title|excerpt:$titleExcerptLen}</a></td>
+  <td class="date">{$item.date_added|e}</td>
+  <td class="date">{$item.date_last_fetched|e}</td>
+  <td class="date">{$item.date_modified|e}</td>
+  <td>{$item.fail_count|e}</td>
+  <td class="date">{$item.http_last_modified|e}</td>
+  <td>{if $item.http_etag}y{else}n{/if}</td>
+  <td>{$item.unique_id|e}</td>
+  <td>{$item.ttl|e}</td>
 </tr>
 {/foreach}
 </table>
@@ -100,27 +100,27 @@ table.log .url {
 <h2>Recent Updates</h2>
 <table class="log">
 <tr>
-	<th>URL</th>
-	<th>Date Added</th>
-	<th>Last Fetch</th>
-	<th>Last Update</th>
-	<th>Failures</th>
-	<th>http_last_modified</th>
-	<th>etag</th>
-	<th>uid</th>
-	<th>ttl</th>
+  <th>URL</th>
+  <th>Date Added</th>
+  <th>Last Fetch</th>
+  <th>Last Update</th>
+  <th>Failures</th>
+  <th>http_last_modified</th>
+  <th>etag</th>
+  <th>uid</th>
+  <th>ttl</th>
 </tr>
 {foreach from=$feeds item=item}
 <tr{if $item.active=='t'} class="active"{else} class="inactive"{/if}>
-	<td class="url"><a href="{$item.url|e}">{$item.title|excerpt:$titleExcerptLen}</a></td>
-	<td class="date">{$item.date_added|e}</td>
-	<td class="date">{$item.date_last_fetched|e}</td>
-	<td class="date">{$item.date_modified|e}</td>
-	<td>{$item.fail_count|e}</td>
-	<td class="date">{$item.http_last_modified|e}</td>
-	<td>{if $item.http_etag}y{else}n{/if}</td>
-	<td>{$item.unique_id|e}</td>
-	<td>{$item.ttl|e}</td>
+  <td class="url"><a href="{$item.url|e}">{$item.title|excerpt:$titleExcerptLen}</a></td>
+  <td class="date">{$item.date_added|e}</td>
+  <td class="date">{$item.date_last_fetched|e}</td>
+  <td class="date">{$item.date_modified|e}</td>
+  <td>{$item.fail_count|e}</td>
+  <td class="date">{$item.http_last_modified|e}</td>
+  <td>{if $item.http_etag}y{else}n{/if}</td>
+  <td>{$item.unique_id|e}</td>
+  <td>{$item.ttl|e}</td>
 </tr>
 {/foreach}
 </table>

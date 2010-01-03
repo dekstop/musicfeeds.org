@@ -5,9 +5,9 @@
  */
 
 ini_set('include_path', 
-	$base_dir . '/lib:' . 
-	$base_dir . '/external:' . 
-	ini_get('include_path'));
+  $base_dir . '/lib:' . 
+  $base_dir . '/external:' . 
+  ini_get('include_path'));
 
 $PKG_DISPLAY = $base_dir . '/display';
 $PKG_ETC = $base_dir . '/etc';

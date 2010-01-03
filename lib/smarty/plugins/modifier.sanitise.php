@@ -12,7 +12,7 @@ require_once('HTML.class.php');
 * @param string $string input string
 */
 function smarty_modifier_sanitise($string) {
-	return HTML::sanitise($string);
+  return HTML::sanitise($string);
 } 
 
 ?>

@@ -13,13 +13,13 @@
  */
 function smarty_function_implode($params, $smarty, $template)
 {
-	if ($params['separator']) {
-		$s = $params['separator'];
-	}
-	else {
-		$s = '';
-	}
-	$a = $params['from'];
-	return implode($s, array_map('htmlspecialchars', $a));
+  if ($params['separator']) {
+    $s = $params['separator'];
+  }
+  else {
+    $s = '';
+  }
+  $a = $params['from'];
+  return implode($s, array_map('htmlspecialchars', $a));
 }
 ?>

@@ -14,7 +14,7 @@ require_once('HTML.class.php');
 * @param int $length maximum character length
 */
 function smarty_modifier_excerpt($string, $length) {
-	return HTML::excerpt($string, $length);
+  return HTML::excerpt($string, $length);
 } 
 
 ?>

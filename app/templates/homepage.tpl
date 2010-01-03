@@ -61,7 +61,7 @@ By
 {if is_array($entry.enclosures) && count($entry.enclosures) > 0}
 <ul class="enclosures">
 {foreach from=$entry.enclosures item=enclosure}
-	<li><a href="{$enclosure.url|e}">{filename url=$enclosure.url|e}</a> ({$enclosure.length|byte_format|e})</li>
+  <li><a href="{$enclosure.url|e}">{filename url=$enclosure.url|e}</a> ({$enclosure.length|byte_format|e})</li>
 {/foreach}
 </ul>
 {/if}
