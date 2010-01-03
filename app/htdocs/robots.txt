@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# we don't really want crawlers here while it's still in early development

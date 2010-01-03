@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# RewriteRule ^root_path/{0,1}$ /index.php?namespace=root&controller=etc   [QSA,L]
+# RewriteRule ^(.[^/\.]+)/(.[^/]*)/{0,1}$ /index.php?controller=$1&action=$2 [QSA,L]
+
+RewriteRule ^/{0,1}$ /fcui/index.php?controller=homepage [QSA,L]
+
+RewriteRule ^(contact|feed|sources)/{0,1}$ /fcui/index.php?controller=$1 [QSA,L]
+RewriteRule ^a/{0,1}$ /fcui/index.php?controller=admin [QSA,L]
+
+RewriteRule ^(about)/{0,1}$ /fcui/index.php?controller=staticpage&template=about.tpl [QSA,L]
+RewriteRule ^(contact/thankyou.php)$ /fcui/index.php?controller=staticpage&template=contact_thankyou.tpl [QSA,L]
+
+#ErrorDocument 404 /404.php

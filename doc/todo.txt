@@ -1,0 +1,14 @@
+2010-01-03 03:20:01
+
+URL generator class
+- know current path when referencing external files (e.g. hardcoded '../' in header_subpage.tpl)
+- can generate both full URL and relative path
+- 
+
+support for relative path/file names in .htaccess files
+- /.htaccess routes require knowledge of current app path in URL
+- /a/.htaccess requires absolute filename of htpasswd file
+- we always would prefer to provide relative paths
+- at minimum: try to only have one location in one file where we specify full deployment path
+  - e.g. generate all htaccess files when deploying -> not nice
+  - better: auto-detect at runtime (may not be possible within .htaccess files)
