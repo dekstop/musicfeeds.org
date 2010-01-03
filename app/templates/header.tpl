@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>{$app.name}{if isset($title)}: {$title|e}{/if}</title>
+	<title>{#appName#}{if isset($title)}: {$title|e}{/if}</title>
 	
 	<link rel="stylesheet" href="./styles.css" type="text/css" />
 	<link rel="alternate" type="application/atom+xml" title="Atom" href="{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}" />

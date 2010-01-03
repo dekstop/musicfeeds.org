@@ -4,7 +4,7 @@ require_once('../init.php');
 
 # Prepare
 $request = new Request();
-$request->setEnv($GLOBALS);
+$request->setEnv($APP_ENV);
 $view = new View($request);
 
 # Execute and display

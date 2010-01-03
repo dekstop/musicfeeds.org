@@ -3,7 +3,7 @@
 
 <div id="content">
 <div id="header">
-<h1><a href="../">{$app.name}</a></h1>
+<h1><a href="../">{#appName#}</a></h1>
 </div>
 
 <p><a href="../">Back Home</a></p>

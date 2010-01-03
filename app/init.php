@@ -25,6 +25,6 @@ require_once('Solr.class.php');
 
 require_once('app.php');
 
-require_once($APP_CONF . '/globals.php');
+require_once($APP_CONF . '/app_env.php');
 
 ?>

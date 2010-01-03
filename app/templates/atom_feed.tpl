@@ -1,7 +1,7 @@
 {config_load file="smarty.conf" section="main"}
 {include file="atom_header.tpl" title="Index page"}
 
-<title>{$app.name}: {$lfmUser|e} {$q|e}</title>
+<title>{#appName#}: {$lfmUser|e} {$q|e}</title>
 <link href="{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}"/>
 <updated>{date()|date_format:'Y-m-d\\TH:i:s\\Z'|e}</updated>
 <id>{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}</id>

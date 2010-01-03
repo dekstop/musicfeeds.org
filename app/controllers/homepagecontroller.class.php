@@ -4,14 +4,12 @@ class HomepageController {
 	
 	function index($request, $view) {
 		
-		// TODO: better conf mechanism
-		global $MAX_ENTRIES, $NUM_ENTRIES_WITHOUT_QUERY;
-		global $feedcache_user;
-		
 		$q = $request->getString('q'); // query
 		$f = $request->getString('f'); // facet
 		$c = $request->getInt('c', 1000); // number of characters per post
-		$n = min($MAX_ENTRIES, $request->getInt('n', 30)); // number of posts per page
+		$n = min( // number of posts per page
+			$request->envVar('display.maxNumItems'), 
+			$request->getInt('n', $request->envVar('display.numQueryResultItems')));
 		$u = $request->getString('lfm:user'); // last.fm user name
 		$m = $request->getInt('m', 2); // max number of consecutive posts by the same blog
 		$a = $request->getInt('a', 35); // max number of Last.fm artists to load
@@ -34,7 +32,7 @@ class HomepageController {
 		$numEntries = $n;
 		if ($u) {
 			// get last.fm artists
-			$lfm = new LastFm($db, $lfm_key);
+			$lfm = new LastFm($db, $request->envVar('lastfm.key'));
 
 			$artistScores = $lfm->getTopArtistScores($u);
 			if(is_null($artistScores)) {
@@ -54,12 +52,12 @@ class HomepageController {
 			(empty($q) && !empty($u) && count($artists)==0)) { // no query, empty lastfm result
 
 			// no query -> show default search
-			$numEntries = $NUM_ENTRIES_WITHOUT_QUERY;
+			$numEntries = $request->envVar('display.numHomepageItems');
 			$lowerOpacity = TRUE;
 		}
 
 		// query
-		$entries = find_entries($db, $solr, $solr_q, $f, $feedcache_user, $numEntries, $m);
+		$entries = find_entries($db, $solr, $solr_q, $f, $request->envVar('feedcache.user'), $numEntries, $m);
 		
 		// display
 		$view->setParam('q', $q);

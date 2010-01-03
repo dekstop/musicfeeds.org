@@ -4,8 +4,6 @@ class AdminController {
 	
 	function index($request, $view) {
 		
-		global $feedcache_user;
-		
 		$db = getDb();
 		if (!$db) {
 			die("Can't connect to the database.");
@@ -13,7 +11,7 @@ class AdminController {
 
 		// params: check POST first
 		$feedUrl = $request->postString('feed_url');
-		$user = $request->postString('user', $feedcache_user); // TODO: global conf for default app username
+		$user = $request->postString('user', $request->envVar('feedcache.user'));
 
 		// handle form
 		if ($feedUrl) {
@@ -30,7 +28,7 @@ class AdminController {
 
 			// see if pre-fill param values were provided
 			$feedUrl = $request->getString('feed_url');
-			$user = $request->getString('user', $feedcache_user); // TODO: global conf for default app username
+			$user = $request->getString('user', $request->envVar('feedcache.user'));
 
 			$batchimports = getRecentBatchimports($db, 7);
 			$failedFeeds = getRecentFailedFeeds($db, 30);

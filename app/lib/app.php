@@ -3,13 +3,17 @@
 // TODO: move all of these to separate classes + smarty plugins
 
 function getDb() {
-	global $db_name, $db_user, $db_pwd;
-	return DB::connect("dbname=${db_name} user=${db_user} password=${db_pwd}");
+	global $APP_ENV;
+	$dsn = "dbname=${APP_ENV['db.name']} user=${APP_ENV['db.user']} password=${APP_ENV['db.password']}";
+	if ($APP_ENV['db.host'] && $APP_ENV['db.host']!='localhost') {
+		$dsn = "host=${APP_ENV['db.host']}" . $dsn;
+	}
+	return DB::connect($dsn);
 }
 
 function getSolr() {
-	global $solr_url;
-	return Solr::connect($solr_url);
+	global $APP_ENV;
+	return Solr::connect($APP_ENV['solr.url']);
 }
 
 
@@ -196,14 +200,14 @@ function db_load_feed_users($db, $feed_ids) {
 
 // main method to load entries, combines data from solr+db
 function find_entries($db, $solr, $q, $facets, $feedcacheUser, $num, $maxPerFeed=2) {
-	global $SOLR_NUM_ENTRIES;
+	global $APP_ENV;
 	$ids = array();
 	$entry_meta = array();
 
 	$solr->setFl('id,date,author,category,enclosure_url,enclosure_mimetype,score');
 	$solr->setSort('date_added desc'); // instead we will sort when loading from DB
 	$solr->setFacets(parseFacets($facets));
-	$result = $solr->select($q, $SOLR_NUM_ENTRIES);
+	$result = $solr->select($q, $APP_ENV['solr.fetchSize']);
 	foreach ($result['result'] as $doc) {
         	$id = $doc['id'];
 	        $ids[] = $id;   

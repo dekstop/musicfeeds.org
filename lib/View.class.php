@@ -7,9 +7,7 @@ class View {
 	
 	function View($request) {
 		$this->_request = $request;
-		$this->_smarty = $this->_buildSmartyObj($request->envVar('smarty'));
-		// make global configuration available to templates
-		$this->setParams($request->getEnv());
+		$this->_smarty = $this->_buildSmartyObj($request->getEnv());
 	}
 	
 	static function _buildSmartyObj($conf) {
@@ -24,10 +22,10 @@ class View {
 			array(
 				$PKG_LIB . '/smarty/plugins',
 				$APP_LIB . '/smarty/plugins'));
-		if ($conf['force_compile']) $smarty->force_compile = $conf['force_compile'];
-		if ($conf['debugging']) $smarty->debugging = $conf['debugging'];
-		if ($conf['caching']) $smarty->caching = $conf['caching'];
-		if ($conf['cache_lifetime']) $smarty->cache_lifetime = $conf['cache_lifetime'];
+		if ($conf['smarty.force_compile']) $smarty->force_compile = $conf['smarty.force_compile'];
+		if ($conf['smarty.debugging']) $smarty->debugging = $conf['smarty.debugging'];
+		if ($conf['smarty.caching']) $smarty->caching = $conf['smarty.caching'];
+		if ($conf['smarty.cache_lifetime']) $smarty->cache_lifetime = $conf['smarty.cache_lifetime'];
 		return $smarty;
 	}
 	
