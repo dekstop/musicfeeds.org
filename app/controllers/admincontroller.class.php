@@ -2,37 +2,13 @@
 
 class AdminController {
   
-  static function _getRecentBatchimports($db, $num) {
-    return $db->query("SELECT id, date_modified, active, url, user_id, imported, date_added, date_last_fetched, fail_count " .
-      "FROM batchimports order by date_added desc limit ?",
-      array($num));
-  }
-
-  static function _getRecentFeeds($db, $num) {
-    return $db->query("SELECT id, date_modified, active, url, actual_url, title, date_added, date_last_fetched, fail_count, " .
-      "http_last_modified, http_etag, unique_id, ttl, date_updated " .
-      "FROM feeds order by date_modified desc limit ?",
-      array($num));
-  }
-
-  static function _getRecentFailedFeeds($db, $num) {
-    return $db->query("SELECT id, date_modified, active, url, actual_url, title, date_added, date_last_fetched, fail_count, " .
-      "http_last_modified, http_etag, unique_id, ttl, date_updated " .
-      "FROM feeds WHERE fail_count>0 order by date_modified desc limit ?",
-      array($num));
-  }
-  
-  static function _getRecentComments($db, $num) {
-    $c = new Usercomments($db);
-    return $c->get($num);
-  }
-
   function index($request, $view) {
     
     $db = getDb();
     if (!$db) {
       die("Can't connect to the database."); // TODO show proper error page
     }
+    $fs = new FeedStore($db);
 
     // params: check POST first
     $feedUrl = $request->postString('feed_url');
@@ -40,7 +16,7 @@ class AdminController {
 
     // handle form
     if ($feedUrl) {
-      $r = submitBatchimportUrl($db, $feedUrl, $user);
+      $r = $fs->addBatchimport($feedUrl, $user);
       if (!($r===FALSE)) {
         $host = $_SERVER['HTTP_HOST'];
         $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -56,10 +32,12 @@ class AdminController {
       $feedUrl = $request->getString('feed_url');
       $user = $request->getString('user', $request->envVar('feedcache.user'));
 
-      $batchimports = AdminController::_getRecentBatchimports($db, 7);
-      $failedFeeds = AdminController::_getRecentFailedFeeds($db, 30);
-      $feeds = AdminController::_getRecentFeeds($db, 50);
-      $comments = AdminController::_getRecentComments($db, 10);
+      $batchimports = $fs->getRecentBatchimports(7);
+      $failedFeeds = $fs->getRecentFailedFeeds(30);
+      $feeds = $fs->getRecentFeeds(50);
+
+      $uc = new Usercomments($db);
+      $comments = $uc->get(10);
       
       $view->setParam('feedUrl', $feedUrl);
       $view->setParam('user', $user);

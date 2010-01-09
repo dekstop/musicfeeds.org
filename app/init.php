@@ -20,6 +20,7 @@ require_once('DB.class.php');
 require_once('HTML.class.php');
 
 require_once('Corpus.class.php');
+require_once('FeedStore.class.php');
 require_once('LastFm.class.php');
 require_once('Solr.class.php');
 require_once('Usercomments.class.php');

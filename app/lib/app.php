@@ -18,19 +18,6 @@ function getSolr() {
 
 
 /*
- * Add Page
- */
-
-function submitBatchimportUrl($db, $feed_url, $user=null) {
-  if (is_null($user) || $user=='') {
-    return $db->insert("INSERT INTO batchimports(url) VALUES(?)", array($feed_url));
-  }
-  return $db->insert("INSERT INTO batchimports(url, user_id) " .
-    "VALUES(?, (SELECT id FROM users WHERE name=?))",
-    array($feed_url, $user)); 
-}
-
-/*
  * Main App (Homepage/Feed)
  */
 
@@ -102,8 +89,8 @@ function db_load_entries($db, $ids, $username=null, $limit=null, $maxPerFeed=2) 
       "e.date AS date, " .
       #"TO_CHAR(e.date_added, 'YYYY-MM-DD HH:mm') AS date_added, " .
       #"TO_CHAR(e.date_published, 'YYYY-MM-DD HH:mm') AS date_published, " .
-      "e.id AS id, e.title AS title, COALESCE(e.content, e.summary) AS content, e.link AS link, " .
-      "CHAR_LENGTH(COALESCE(e.content, e.summary)) AS size " .
+      "e.id AS id, e.title AS title, COALESCE(e.content, e.summary) AS content, e.link AS link " .
+      #", CHAR_LENGTH(COALESCE(e.content, e.summary)) AS size " .
     "FROM feeds f INNER JOIN entries e ON f.id=e.feed_id " .
     (is_null($username) ? "" : 
       "INNER JOIN users_feeds uf ON f.id=uf.feed_id " .
