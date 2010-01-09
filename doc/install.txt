@@ -1,0 +1,27 @@
+2010-01-09 15:24:19
+
+ ================
+ = Requirements =
+ ================
+
+- Apache with mod_php, mod_rewrite
+- PHP 5 with Postgres bindings
+- feedcache app set up (Postgres DB and Solr instance)
+- ...?
+
+ ================
+ = Installation =
+ ================
+
+Setup
+- edit settings in ./app/conf/app_env.php (DB, Solr, etc)
+- edit settings in ./app/conf/smarty.conf (display strings)
+
+Apache configuration
+- make sure Apache follows symlinks (Options FollowSymLinks) so we can use mod_rewrite
+- to host as a dedicated site: set Apache DocumentRoot to /<app root>/app/htdocs/
+- To host as a subdirectory of an existing site: symlink from somewhere in your Apache DocumentRoot to /<app root>/app/htdocs/
+
+To set up HTTP Basic auth for admin area:
+- add some users to ./app/conf/htpasswd (default account is editor/editor)
+- provide the _absolute_ path to the htpasswd file in ./app/htdocs/a/.htaccess (as AuthUserFile)
