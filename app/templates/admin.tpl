@@ -38,8 +38,13 @@ table.log .url {
 <h1><a href="../">{#appName#}</a></h1>
 </div>
 
-<p><a href="../">Back Home</a></p>
+<p><a href="#add">Add a Feed</a> 
+  &middot; <a href="#imports">Recent Imports</a> 
+  &middot; <a href="#failures">Failed Updates</a> 
+  &middot; <a href="#updates">Recent Updates</a> 
+  &middot; <a href="#comments">Recent Comments</a></p>
 
+<a name="add"></a>
 <h2>Add a Feed</h2>
 
 <form action="." method="post">
@@ -47,6 +52,7 @@ table.log .url {
 <p>Username: <input type="text" name ="user" value="{$user|e}" /></p>
 </form>
 
+<a name="imports"></a>
 <h2>Recent Imports</h2>
 <table class="log">
 <tr>
@@ -69,6 +75,7 @@ table.log .url {
 {/foreach}
 </table>
 
+<a name="failures"></a>
 <h2>Failed Updates</h2>
 <table class="log">
 <tr>
@@ -97,6 +104,7 @@ table.log .url {
 {/foreach}
 </table>
 
+<a name="updates"></a>
 <h2>Recent Updates</h2>
 <table class="log">
 <tr>
@@ -121,6 +129,27 @@ table.log .url {
   <td>{if $item.http_etag}y{else}n{/if}</td>
   <td>{$item.unique_id|e}</td>
   <td>{$item.ttl|e}</td>
+</tr>
+{/foreach}
+</table>
+
+<a name="comments"></a>
+<h2>Recent Comments</h2>
+<table class="log">
+<tr>
+  <th>Date</th>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Comment</th>
+  <th>URL</th>
+</tr>
+{foreach from=$comments item=item}
+<tr>
+  <td class="date">{$item.date|e}</td>
+  <td>{$item.author_name|e}</td>
+  <td>{if $item.author_email}{mailto address=$item.author_email subject="[{#appName#}] contact form {$item.date}"|e}{/if}</td>
+  <td>{$item.comments|e}</td>
+  <td class="url"><a href="{$item.url|e}">{$item.url|excerpt:$urlExcerptLen}</a></td>
 </tr>
 {/foreach}
 </table>

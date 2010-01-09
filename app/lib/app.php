@@ -18,16 +18,6 @@ function getSolr() {
 
 
 /*
- * Contact Page
- */
-
-function submitUserComment($db, $author_name, $author_email, $url, $comments) {
-  return $db->insert("INSERT INTO musicfeeds_usercomments(author_name, author_email, url, comments) VALUES (?, ?, ?, ?)",
-    array($author_name, $author_email, $url, $comments));
-}
-
-
-/*
  * Add Page
  */
 
@@ -38,30 +28,6 @@ function submitBatchimportUrl($db, $feed_url, $user=null) {
   return $db->insert("INSERT INTO batchimports(url, user_id) " .
     "VALUES(?, (SELECT id FROM users WHERE name=?))",
     array($feed_url, $user)); 
-}
-
-/*
- * Status Page
- */
-
-function getRecentBatchimports($db, $num) {
-  return $db->query("SELECT id, date_modified, active, url, user_id, imported, date_added, date_last_fetched, fail_count " .
-    "FROM batchimports order by date_added desc limit ?",
-    array($num));
-}
-
-function getRecentFeeds($db, $num) {
-  return $db->query("SELECT id, date_modified, active, url, actual_url, title, date_added, date_last_fetched, fail_count, " .
-    "http_last_modified, http_etag, unique_id, ttl, date_updated " .
-    "FROM feeds order by date_modified desc limit ?",
-    array($num));
-}
-
-function getRecentFailedFeeds($db, $num) {
-  return $db->query("SELECT id, date_modified, active, url, actual_url, title, date_added, date_last_fetched, fail_count, " .
-    "http_last_modified, http_etag, unique_id, ttl, date_updated " .
-    "FROM feeds WHERE fail_count>0 order by date_modified desc limit ?",
-    array($num));
 }
 
 /*
