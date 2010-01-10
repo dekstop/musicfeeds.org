@@ -29,7 +29,7 @@ function smarty_function_searchURL($params, $smarty, $template)
     $url .= '&f=' . formatFacets($f);
   }
   if ($lfmUser = _extract_param($params, 'lfmUser')) {
-    $url .= '&lfm%3auser=' . urlencode($lfmUser);
+    $url .= '&lfm%3Auser=' . urlencode($lfmUser);
   }
   
   // and any additional parameters provided:

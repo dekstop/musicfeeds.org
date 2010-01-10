@@ -86,7 +86,7 @@ function db_load_entries($db, $ids, $username=null, $limit=null, $maxPerFeed=2) 
   $select = 
     "SELECT f.title AS feed_title, f.link AS feed_link, f.id AS feed_id, " .
       #"TO_CHAR(e.date, 'YYYY-MM-DD') AS date, " .
-      "e.date AS date, " .
+      "e.date AS date, e.unique_id AS unique_id, " .
       #"TO_CHAR(e.date_added, 'YYYY-MM-DD HH:mm') AS date_added, " .
       #"TO_CHAR(e.date_published, 'YYYY-MM-DD HH:mm') AS date_published, " .
       "e.id AS id, e.title AS title, COALESCE(e.content, e.summary) AS content, e.link AS link " .

@@ -3,7 +3,7 @@
 
 {foreach from=$entries item=entry}
 <entry>
-  <id>id:{#appUrl#|e}:entry:{$entry.id|e}</id>
+  <id>{if $entry.unique_id}{$entry.unique_id}{else}id_{#appUrl#|e}_entry_{$entry.id|e}{/if}</id>
   <title type="html"><![CDATA[ {$entry.title|sanitise} ]]></title>
   <link rel="alternate" href="{$entry.link|e}" />
   <link rel="via" title="{$entry.feed_title|e}" href="{$entry.feed_link|e}" />
