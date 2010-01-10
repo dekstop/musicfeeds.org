@@ -4,7 +4,7 @@
  *
  * Type:     function<br>
  * Name:     searchURL<br>
- * Purpose:  build search URL<br>
+ * Purpose:  build search URL, properly escaped for inclusion in both HTML and XML documents<br>
  *
  * @param array $params URL parameters
  * @param object $smarty Smarty object
@@ -13,34 +13,38 @@
  */
 function smarty_function_searchURL($params, $smarty, $template)
 {
-  if ($params['base']) {
-    $url = $params['base'];
-    unset($params['base']);
+  $url = _extract_param($params, 'base', './');
+  
+  // search query string:
+  $url .= '?q=' . urlencode(_extract_param($params, 'q'));
+  if ($feed_id = _extract_param($params, 'q')) {
+    $url .= '+feed_id:' . urlencode($feed_id);
   }
-  else {
-    $url = './';
+  if ($category = _extract_param($params, 'category')) {
+    $url .= '+category:' . Solr::quoteTerm($category); // part of search query string
   }
   
-  $url .= '?q=' . urlencode($params['q']);
-  if ($params['feed_id']) {
-    $url .= '+feed_id:' . urlencode($params['feed_id']); // part of query string
+  // remaining search parameters:
+  if ($f = _extract_param($params, 'f')) {
+    $url .= '&f=' . formatFacets($f);
   }
-  if ($params['category']) {
-    $url .= '+category:' . Solr::quoteTerm($category); // part of query string
+  if ($lfmUser = _extract_param($params, 'lfmUser')) {
+    $url .= '&lfm%3auser=' . urlencode($lfmUser);
   }
   
-  unset($params['q']);
-  if ($params['f']) {
-    $url .= '&f=' . formatFacets($params['f']);
-    unset($params['f']);
-  }
-  if ($params['lfmUser']) {
-    $url .= '&lfm:user=' . urlencode($params['lfmUser']);
-    unset($params['lfmUser']);
-  }
+  // and any additional parameters provided:
   foreach ($params as $key=>$value) {
     $url .= '&' . $key . '=' . urlencode($value);
   }
   return $url;
+}
+
+function _extract_param(&$params, $key, $default=null) {
+  if (array_key_exists($key, $params)) {
+    $v = $params[$key];
+    unset($params[$key]);
+    return $v;
+  }
+  return $default;
 }
 ?>
