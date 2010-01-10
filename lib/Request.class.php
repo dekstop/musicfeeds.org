@@ -5,7 +5,7 @@
  */
 class Request {
   
-  private $DEFAULT_ACTION = 'index';
+  const DEFAULT_ACTION = 'index';
   
   var $_env = array();
   
@@ -18,14 +18,19 @@ class Request {
   }
   
   /**
-   * Only returns the input string if it consists of alphanumeric characters. 
+   * Only returns the input string if it starts with an alphanumeric character
+   * and exclusively consists of alphanumeric characters or underscores. 
    * Otherwise returns an empty string.
+   * 
+   * This is mostly for security reasons, but also allows us to hide 
+   * functions/classes/directories by prefixing their name with an underscore
+   * character.
    */
   static function _cleanPathElement($pathElement) {
     if (is_null($pathElement)) {
       return '';
     }
-    if (preg_match('/^[a-zA-z0-9_-]+$/', $pathElement)==0) {
+    if (preg_match('/^[a-zA-z0-9][a-zA-z0-9_-]*$/', $pathElement)==0) {
       return '';
     }
     return $pathElement;
@@ -34,7 +39,7 @@ class Request {
   function _parse($array) {
     $this->_namespace = Request::_cleanPathElement($this->_get($array, 'namespace', null));
     $this->_controller = Request::_cleanPathElement($this->_get($array, 'controller'));
-    $this->_action = Request::_cleanPathElement($this->_get($array, 'action', $this->DEFAULT_ACTION));
+    $this->_action = Request::_cleanPathElement($this->_get($array, 'action', Request::DEFAULT_ACTION));
   }
   
   /**
