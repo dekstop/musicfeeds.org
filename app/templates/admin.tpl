@@ -31,7 +31,28 @@ table.log .date {
 }
 table.log .url {
 }
+#spinner {
+  font-size: 0.5em;
+}
 </style>
+
+<script type="text/javascript">
+function getFeedInfo(url) {
+  $.getJSON("{#appUrl#}/ajax/feedinfo?url=" + encodeURIComponent(url),
+    function(data) {
+      if (data.length==0) {
+        $('#spinner').html("This URL is new! Yay");
+      } else {
+        $('#spinner').html("This feed is already known. Added " + data[0].date_added);
+      }
+    });
+  $('#spinner').html("Checking ...");
+}
+
+$(document).ready(function(){
+  if ($('#feed_url').value!='') getFeedInfo($('#feed_url').value);
+});
+</script>
 
 <div id="content">
 <div id="header">
@@ -48,7 +69,7 @@ table.log .url {
 <h2>Add a Feed</h2>
 
 <form action="." method="post">
-<p>Feed URL: <input type="text" name ="feed_url" value="{$feedUrl|e}" /> <input type="submit" value="Send" /></p> 
+<p>Feed URL: <input type="text" name ="feed_url" id="feed_url" value="{$feedUrl|e}" onchange="getFeedInfo(this.value)"/> <input type="submit" value="Send" /> <span id="spinner"></span></p> 
 <p>Username: <input type="text" name ="user" value="{$user|e}" /></p>
 </form>
 

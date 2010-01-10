@@ -11,4 +11,6 @@ RewriteRule ^a/{0,1}$ index.php?controller=admin [QSA,L]
 RewriteRule ^(about)/{0,1}$ index.php?controller=staticpage&template=about.tpl [QSA,L]
 RewriteRule ^(contact/thankyou.php)$ index.php?controller=staticpage&template=contact_thankyou.tpl [QSA,L]
 
+RewriteRule ^ajax/([^/]+)/{0,1}$ index.php?namespace=ajax&controller=$1 [QSA,L]
+
 #ErrorDocument 404 /404.php

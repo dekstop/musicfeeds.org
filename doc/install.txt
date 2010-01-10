@@ -5,7 +5,7 @@
  ================
 
 - Apache with mod_php, mod_rewrite
-- PHP 5 with Postgres bindings
+- PHP 5.2.1 and above with Postgres bindings, JSON support
 - feedcache app set up (Postgres DB and Solr instance)
 - ...?
 

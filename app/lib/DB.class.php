@@ -1,5 +1,9 @@
 <?
 
+/**
+ * PostgreSQL DB access layer.
+ * TODO: implement this using pg_query_params so we don't have to manually escape values; though we will still need to implement custom binding for array values (convert them to a comma-separated string while taking care of quoting)
+ */
 class DB {
 
   public $_db = null;
@@ -13,8 +17,13 @@ class DB {
     return FALSE;
   }
 
+  function quoteIdentifier($identifier) {
+    return str_replace('"', '""', $identifier);
+  }
+
   function escapeValue($value) {
-    return str_replace("'", "''", $value);
+    return pg_escape_string($value);
+    //return str_replace("'", "''", $value);
   }
 
   function bindVariables($query, $parms) {
