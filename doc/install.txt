@@ -14,8 +14,8 @@
  ================
 
 Setup
-- edit settings in ./app/conf/app_env.php (DB, Solr, etc)
-- edit settings in ./app/conf/smarty.conf (display strings)
+- rename ./app/conf/app_env.php.example to app_env.php, edit settings (DB, Solr, etc)
+- rename ./app/conf/smarty.conf.example to smarty.conf, edit settings (display strings)
 
 Apache configuration
 - make sure Apache follows symlinks (Options FollowSymLinks) so we can use mod_rewrite
