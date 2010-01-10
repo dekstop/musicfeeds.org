@@ -13,6 +13,10 @@ class LastFm {
   const CHARTTYPE_3MONTH = '3month';
   const CHARTTYPE_6MONTH = '6month';
   const CHARTTYPE_12MONTH = '12month';
+  
+  const DEFAULT_CHARTTYPE = LastFm::CHARTTYPE_3MONTH;
+  
+  const CACHE_TIMEOUT = 604800; // cache expires after 1 week
 
   private $_key = null;
   private $_secret = null;
@@ -104,8 +108,8 @@ class LastFm {
   // Checks if the data is already cached locally, and the cache not stale.
   // If it isn't cache this will request the data from Last.fm and store it 
   // in the DB.
-  function _prefetchTopArtists($username, $charttype, $limit) {
-    if ($this->_isCacheExpired($username, $chartType, 60 * 60 * 24 * 7)) { // cache expires after 1 week
+  function _prefetchTopArtists($username, $chartType, $limit) {
+    if ($this->_isCacheExpired($username, $chartType, LastFm::CACHE_TIMEOUT)) { 
       $artists = $this->_fetchTopArtistRecords($username, $chartType);
       if (!is_array($artists)) {
         // failed to load -> return null/error
@@ -120,7 +124,7 @@ class LastFm {
   /**
    * Returns null in case of an error, or a map of artist names and playcounts.
    */
-  function getTopArtistScores($username, $chartType=LastFm::CHARTTYPE_3MONTH, $limit=null) {
+  function getTopArtistScores($username, $chartType=LastFm::DEFAULT_CHARTTYPE, $limit=null) {
     $this->_prefetchTopArtists($username, $chartType, $limit);
 
     $query = "SELECT a.name AS name, a.playcount AS playcount " .
@@ -143,27 +147,6 @@ class LastFm {
     return $result;
   }
 
-  /**
-   * Returns null in case of an error, or a list of artist names.
-   */
-  function getTopArtists($username, $chartType=LastFm::CHARTTYPE_3MONTH, $limit=null) {
-    $this->_prefetchTopArtists($username, $chartType, $limit);
-
-    $query = "SELECT a.name FROM musicfeeds_lastfm_usercharts u " .
-      "INNER JOIN musicfeeds_lastfm_userchart_artists a ON u.id=a.lastfm_user_id " .
-      "WHERE u.name=? AND u.chart_type=? AND u.date=(" .
-        "SELECT max(date) FROM musicfeeds_lastfm_usercharts " .
-        "WHERE name=? AND chart_type=?" .
-      ") ORDER BY a.rank ASC";
-    $parameters = array($username, $chartType, $username, $chartType);
-    if (is_numeric($limit)) {
-      $query .= " LIMIT ?";
-      $parameters[] = $limit;
-    }
-    $result = $this->_db->getList($query, $parameters);
-    return $result;
-  }
-
 }
 
 /*
@@ -178,6 +161,6 @@ if (!$db) {
 }
 
 $lfm = new LastFm($db, $key, $secret);
-print_r($lfm->getTopArtists('martind'));
+print_r($lfm->getTopArtistScores('martind'));
 */
 ?>
