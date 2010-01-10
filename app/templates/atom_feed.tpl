@@ -10,7 +10,7 @@
   <updated>{strtotime($entry.date)|date_format:'Y-m-d\\TH:i:s\\Z'|e}</updated>
 
   {if is_array($entry.authors) && count($entry.authors)>0}
-  <author><name>{implode from=$authors separator='</name> <name>'}</name></author>
+  <author><name>{implode from=$entry.authors separator='</name> <name>'}</name></author>
   {else}
   <author><name>Unknown</name></author>
   {/if}
