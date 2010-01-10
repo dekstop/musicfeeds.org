@@ -5,7 +5,7 @@
   <title>{#appName#}{if isset($title)}: {$title|e}{/if}</title>
   
   <link rel="stylesheet" href="./styles.css" type="text/css" />
-  <link rel="alternate" type="application/atom+xml" title="Atom" href="{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}" />
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="{searchURL base='./feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}" />
   
   <script type="text/javascript" src="./js/jquery.js"></script>
 {literal}

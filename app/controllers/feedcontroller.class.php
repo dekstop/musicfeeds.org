@@ -11,6 +11,8 @@ class FeedController {
       $request->envVar('display.maxNumItems'), 
       $request->getInt('n', $request->envVar('display.numQueryResultItems')));
     $u = $request->getString('lfm:user'); // last.fm user name
+    $m = $request->getInt('m', 2); // max number of consecutive posts by the same blog
+    $a = $request->getInt('a', 35); // max number of Last.fm artists to load
 
     $lastfmFailed = false;
 

@@ -14,7 +14,7 @@
 function smarty_function_searchURL($params, $smarty, $template)
 {
   if ($params['base']) {
-    $url = $base;
+    $url = $params['base'];
     unset($params['base']);
   }
   else {

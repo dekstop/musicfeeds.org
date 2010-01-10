@@ -1,15 +1,9 @@
 {config_load file="smarty.conf" section="main"}
-{include file="atom_header.tpl" title="Index page"}
-
-<title>{#appName#}: {$lfmUser|e} {$q|e}</title>
-<link href="{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}"/>
-<updated>{date()|date_format:'Y-m-d\\TH:i:s\\Z'|e}</updated>
-<id>{searchURL base='http://musicfeeds.screamorap.org/feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}</id>
-<generator>MicroLink 5.6</generator>
+{include file="atom_header.tpl" title="{#appName#}: {$lfmUser} {$q}" link="{searchURL base={#appUrl#} q=$q f=$f c=$c n=$n lfmUser=$lfmUser}"}
 
 {foreach from=$entries item=entry}
 <entry>
-  <id>musicfeeds.screamorap.org:entry:{$entry.id|e}</id>
+  <id>id:{#appUrl#|e}:entry:{$entry.id|e}</id>
   <title type="html"><![CDATA[ {$entry.title|sanitise} ]]></title>
   <link rel="alternate" href="{$entry.link|e}" />
   <link rel="via" title="{$entry.feed_title|e}" href="{$entry.feed_link|e}" />
