@@ -3,7 +3,7 @@
 URL generator class
 - knows current document URL when referencing external files (e.g. hardcoded '../' in header_subpage.tpl)
 - can generate both full URL and relative path
-- 
+- when providing state in URL parameters: don't include parameters that are set to default values anyway (e.g. &c=..., &n=...)
 
 support for relative path/file names in .htaccess files
 - /a/.htaccess requires absolute filename of htpasswd file, but we would prefer to provide a relative path
