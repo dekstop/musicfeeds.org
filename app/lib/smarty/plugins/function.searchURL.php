@@ -21,7 +21,7 @@ function smarty_function_searchURL($params, $smarty, $template)
     $url .= '+feed_id:' . urlencode($feed_id);
   }
   if ($category = _extract_param($params, 'category')) {
-    $url .= '+category:' . Solr::quoteTerm($category); // part of search query string
+    $url .= '+category:' . urlencode(Solr::quoteTerm($category)); // part of search query string
   }
   
   // remaining search parameters:
