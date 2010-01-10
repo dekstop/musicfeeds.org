@@ -1,5 +1,7 @@
 2010-01-03 03:20:01
 
+- make html and feed as valid as possible (atm: still need to encode ampersands which for some reason doesn't happen in the 'e' smarty modifier, which calls htmlentities)
+
 URL generator class
 - knows current document URL when referencing external files (e.g. hardcoded '../' in header_subpage.tpl)
 - can generate both full URL and relative path
