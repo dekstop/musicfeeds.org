@@ -3,6 +3,6 @@
 
 <h1>404 Page Not Found</h1>
 
-<b>{$msg}</b>
+<b>{$msg|e}</b>
 
 {include file="footer.tpl"}

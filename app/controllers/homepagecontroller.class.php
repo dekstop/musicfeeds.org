@@ -35,7 +35,7 @@ class HomepageController {
       $lfm = new LastFm($db, $request->envVar('lastfm.key'));
 
       $artistScores = $lfm->getTopArtistScores($u);
-      if(is_null($artistScores)) {
+      if(is_null($artistScores) || count($artistScores)==0) {
         $lastfmFailed = true;
       }
       else {
