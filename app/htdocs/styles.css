@@ -1,48 +1,48 @@
 
 body {
-	font-family: Helvetica, Arial;
-	font-size: 1em;
+  font-family: Helvetica, Arial;
+  font-size: 1em;
 }
 a {
-	color: #ff469f;
+  color: #ff469f;
 }
 a img {
-	border-style: none;
+  border-style: none;
 }
 #main {
-	max-width: 950px;
+  max-width: 950px;
 }
 
 #content {
-	float: left;
-	max-width: 650px;
-	margin: 0em 0em 0em 2em;
+  float: left;
+  max-width: 650px;
+  margin: 0em 0em 0em 2em;
 }
 
 #nav {
-	float: right;
-	width: 200px;
-	margin: 100px 0em 0em 0em;
-	line-height: 1em;
+  float: right;
+  width: 200px;
+  margin: 100px 0em 0em 0em;
+  line-height: 1em;
 }
 #nav .search {
-	line-height: 1.2em;
+  line-height: 1.2em;
 }
 #nav .i_lfm {
-	font-size: 2em;
-	max-width: 200px;
+  font-size: 2em;
+  max-width: 200px;
 }
 #nav .i_filter {
-	font-size: 0.8em;
-	max-width: 200px;
+  font-size: 0.8em;
+  max-width: 200px;
 }
 
 #header {
-	padding: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
 }
 #header a {
-	color: #333333;
-	text-decoration: none;
+  color: #333333;
+  text-decoration: none;
 }
 
 /*
@@ -50,42 +50,42 @@ a img {
 */
 
 .item {
-	font-size: 0.8em;
-	border: 5px dashed #eeeeee;
-	margin-bottom: -5px;
-	padding: 2em 5em 2em 2em;
+  font-size: 0.8em;
+  border: 5px dashed #eeeeee;
+  margin-bottom: -5px;
+  padding: 2em 5em 2em 2em;
 }
 .item .footer {
-	margin-top: 2em;
+  margin-top: 2em;
 }
 .source {
-	font-size: 1.5em;
-	color: #443333;
+  font-size: 1.5em;
+  color: #443333;
 }
 .source a, .item h1 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 .source a:hover, .item h1 a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 .source .category, .source .category a, .enclosures {
-	color: #666666;
+  color: #666666;
 }
 .source .more {
-	font-size: 0.5em;
-	letter-spacing: 0.1em;
+  font-size: 0.5em;
+  letter-spacing: 0.1em;
 }
 .source .star, .source .star a {
-	color: #eeeeee;
+  color: #eeeeee;
 }
 .author {
 }
 .date {
 }
 .enclosures {
-	background: #ffeef8;
-	padding: 1em 2em 1em 2em;
-	margin: 0;
+  background: #ffeef8;
+  padding: 1em 2em 1em 2em;
+  margin: 0;
 }
 
 /* 
@@ -93,11 +93,15 @@ a img {
 */
 
 .more, .more a {
-	color: #888888;
+  color: #888888;
 }
 
 .description, .description a, .fineprint {
-	color: #888888;
-	font-size: 0.8em;
+  color: #888888;
+  font-size: 0.8em;
 }
 
+.error {
+  background: #ffeef8;
+  padding: 10px;
+}

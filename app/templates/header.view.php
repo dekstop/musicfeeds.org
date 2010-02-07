@@ -2,13 +2,12 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>{#appName#}{if isset($title)}: {$title|e}{/if}</title>
+  <title><?= $appName->with_subtitle($title) ?></title>
   
   <link rel="stylesheet" href="./styles.css" type="text/css" />
-  <link rel="alternate" type="application/atom+xml" title="Atom" href="{searchURL base='./feed/' q=$q f=$f c=$c n=$n lfmUser=$lfmUser|e}" />
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="<?= searchUrl(array('base'=>'feed/', 'q'=>$q, 'f'=>$f, 'c'=>$c, 'n'=>$n, 'lfmUser'=>$lfmUser)) ?>" />
   
   <script type="text/javascript" src="./js/jquery.js"></script>
-{literal}
   <script type="text/javascript">
   $(document).ready(function(){
     $('.content img').each(function(){
@@ -16,10 +15,8 @@
     });
   });
   </script>
-{/literal}
 
-{if $lowerOpacity==TRUE}
-{literal}
+<? if ($lowerOpacity->is_true()) { ?>
   <style type="text/css">
   .item {
     filter:alpha(opacity=30);
@@ -28,8 +25,7 @@
     opacity: 0.3;
   }
   </style>
-{/literal}
-{/if}
+<? } ?>
 
 </head>
 <body>

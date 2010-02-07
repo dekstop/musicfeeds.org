@@ -48,6 +48,11 @@ class Property {
   /**
    * For use as flag in display logic control structures.
    */
+  public function equals($other) { return $this->value==Sandbox::unwrap($other); }
+  
+  /**
+   * For use as flag in display logic control structures.
+   */
   public function is_true() { return $this->value===TRUE; }
   
   /**
@@ -64,5 +69,20 @@ class Property {
    * For use as flag in display logic control structures.
    */
   public function is_empty_string() { return $this->value===''; }
+  
+  /**
+   * For use as flag in display logic control structures.
+   */
+  public function is_array() { return is_array($this->value); }
+  
+  /**
+   * For use as flag in display logic control structures.
+   */
+  public function is_empty() { 
+    return 
+      (self::is_null()) ||
+      (self::is_array() && count($this->value)==0) ||
+      (self::is_empty_string($this->value)); 
+  }
 }
 ?>

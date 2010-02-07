@@ -1,8 +1,19 @@
 2010-01-03 03:20:01
 
+View.php impl:
+- get rid of all x->raw() calls in templates
+- TODO: unit tests for custom View.php renderers
+- TODO: HTML::sanitise/excerpt in combination with View.php means we double(/triple?)-escape HTML entities
+  - TODO: when the above is fixed: re-evaluate if we need CDATA tags around feed title/content
+- TODO: convert header/footer includes to View.php fragments, once that is implemented, for html and feed
+- TODO: implement a replacement for Apache ErrorDocument that allows us to display templates (e.g. on 404), but still works on template errors (e.g. 503)
+- TODO: use git's subtree merges or submodules to include View.php instead of maintaining a separate copy (the former gets checked out automatically, while the latter makes it easier to commit back changes)
+  - alternative: checkout View.php inside main project
+
 - make html and feed as valid as possible (atm: still need to encode ampersands which for some reason doesn't happen in the 'e' smarty modifier, which calls htmlentities)
 
-URL generator class
+URL generator class/routing
+- get relative request by stripping path elements in $_SERVER['SCRIPT_NAME'] from $_SERVER['REQUEST_URI']
 - knows current document URL when referencing external files (e.g. hardcoded '../' in header_subpage.tpl)
 - can generate both full URL and relative path
 - when providing state in URL parameters: don't include parameters that are set to default values anyway (e.g. &c=..., &n=...)
@@ -12,3 +23,8 @@ support for relative path/file names in .htaccess files
 - at minimum: try to only have one location in one file where we specify full deployment path
   - e.g. generate all htaccess files when deploying -> not nice
   - better: auto-detect at runtime (may not be possible within .htaccess files)
+
+Extract components:
+- "MC" model+controller framework; maybe even just the controller part.
+- database abstraction (?)
+- 

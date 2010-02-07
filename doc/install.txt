@@ -6,6 +6,7 @@
 
 - Apache with mod_php, mod_rewrite
 - PHP 5.2.1 and above with Postgres bindings, JSON support
+- short_open_tag = On in php.ini
 - feedcache app set up (Postgres DB and Solr instance)
 - ...?
 
@@ -15,8 +16,7 @@
 
 Setup
 - rename ./app/conf/app_env.php.example to app_env.php, edit settings (DB, Solr, etc)
-- rename ./app/conf/smarty.conf.example to smarty.conf, edit settings (display strings)
-- ensure that ./var/templates_c and ./var/cache are writable for your Apache process (under Debian: chmod -R www-data:www-data ./var/*)
+- rename ./app/conf/display_vars.php.example to display_vars.php, edit settings (display strings)
 
 Apache configuration
 - make sure Apache follows symlinks (Options FollowSymLinks) so we can use mod_rewrite

@@ -20,7 +20,7 @@ class SourcesController {
       array($request->envVar('feedcache.user')));
     
     $view->setParam('feeds', $feeds);
-    $view->display('sources.tpl');
+    $view->display('sources');
     
     $db->close();
   }

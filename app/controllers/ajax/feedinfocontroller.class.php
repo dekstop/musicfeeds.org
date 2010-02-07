@@ -19,7 +19,7 @@ class FeedInfoController {
       $view->setParam('data', $feedinfo);
 
       header('Content-type: application/json');
-      $view->display('ajax/json_response.tpl');
+      $view->display('ajax/json_response');
     } else {
       // TODO: how do we signal missing parameters in JSON responses? via HTTP status codes?
     }

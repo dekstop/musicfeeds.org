@@ -30,7 +30,7 @@ class ContactController {
       $view->setParam('f', $f);
       $view->setParam('c', $c);
       $view->setParam('n', $n);
-      $view->display('contact.tpl');
+      $view->display('contact');
     }
   }
 }

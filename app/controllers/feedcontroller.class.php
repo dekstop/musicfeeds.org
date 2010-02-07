@@ -58,9 +58,10 @@ class FeedController {
     $view->setParam('entries', $entries);
     $view->setParam('lastfmFailed', $lastfmFailed);
     $view->setParam('artists', $artists);
+    $view->setParam('now', time());
     
     header('Content-type: application/atom+xml');
-    $view->display('atom_feed.tpl');
+    $view->display('atom_feed');
     
     $db->close();
   }

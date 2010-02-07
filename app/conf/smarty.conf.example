@@ -1,6 +1,0 @@
-# Smarty display configuration.
-
-[main]
-# put core conf here.
-appName="Music Feeds"
-appUrl="http://musicfeeds.screamorap.org/"

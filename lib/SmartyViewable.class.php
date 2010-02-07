@@ -1,11 +1,13 @@
 <?
 
-class View {
+require_once 'Viewable.class.php';
+
+class SmartyViewable implements Viewable {
   
   var $_request;
   var $_smarty;
   
-  function View($request) {
+  function setRequest($request) {
     $this->_request = $request;
     $this->_smarty = $this->_buildSmartyObj($request->getEnv());
   }
@@ -40,7 +42,7 @@ class View {
   }
   
   function display($template) {
-    $this->_smarty->display($template);
+    $this->_smarty->display($template . '.tpl');
   }
 }
 ?>

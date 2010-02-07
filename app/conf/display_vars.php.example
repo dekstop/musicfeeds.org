@@ -1,0 +1,13 @@
+<?
+
+// Display variables configuration.
+// Entries in this map will be available as display variables in Request class instances,
+// and passed on to Viewable instances (templates).
+$DISPLAY_VARS = array(
+
+  'appName' => 'Music Feeds',
+  'appUrl' => 'http://musicfeeds.screamorap.org/',
+
+);
+
+?>

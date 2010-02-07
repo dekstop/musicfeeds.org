@@ -18,6 +18,10 @@ class DateRendererTest extends RendererUnitTestCase {
     $this->assertEqual('2009-02-13 23:31', $this->render(1234567890, 'date', 'Y-m-d H:i'));
   }
 
+  function test_string_timestamps() {
+    $this->assertEqual('2009-02-13 23:31', $this->render('2009-02-13 23:31', 'date', 'Y-m-d H:i'));
+  }
+
   function test_no_args() {
     $this->expectException();
     $this->render(1234567890, 'date');

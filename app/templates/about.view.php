@@ -1,9 +1,8 @@
-{config_load file="smarty.conf" section="main"}
-{include file="header_subpage.tpl" title="About"}
+<? $title=new Property('About'); include('header_subpage.view.php') ?>
 
 <div id="content">
 <div id="header">
-<h1><a href="../">{#appName#}</a></h1>
+<h1><a href="../"><?= $appName ?></a></h1>
 </div>
 
 <p><a href="../">Back Home</a></p>
@@ -23,4 +22,4 @@
 <p>We make no uptime guarantees, and may decide to stop operating the service at any time.</p>
 </div>
 
-{include file="footer.tpl"}
+<? include('footer.view.php') ?>

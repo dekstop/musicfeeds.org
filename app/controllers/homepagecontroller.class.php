@@ -70,7 +70,7 @@ class HomepageController {
     $view->setParam('lowerOpacity', $lowerOpacity);
     $view->setParam('artists', $artists);
     
-    $view->display('homepage.tpl');
+    $view->display('homepage');
     
     $db->close();
   }

@@ -50,7 +50,7 @@ class AdminController {
       $view->setParam('urlExcerptLen', 50);
       $view->setParam('titleExcerptLen', 35);
       
-      $view->display('admin.tpl');
+      $view->display('admin');
     }
     
     $db->close();
