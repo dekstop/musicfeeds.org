@@ -32,7 +32,7 @@ class Dispatcher {
   function send404($request, $view, $msg=null) {
     header('HTTP/1.0 404 Not Found');
     $view->setParam("msg", $msg);
-    $view->display("404.tpl");
+    $view->display("404");
     exit;
   }
   

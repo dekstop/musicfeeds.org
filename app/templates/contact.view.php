@@ -1,4 +1,4 @@
-<?= $view->display('header_subpage')->title($appName->with_subtitle('Contact')) ?>
+<?= $view->display('header_subpage')->appUrl($appUrl)->title($appName->with_subtitle('Contact')) ?>
 
 <div id="content">
 <div id="header">

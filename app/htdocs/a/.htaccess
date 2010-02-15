@@ -1,4 +1,4 @@
 AuthName "Restricted area"
 AuthType Basic
-AuthUserFile /web/site/fcui/app/conf/htpasswd
+AuthUserFile /web/site/musicfeeds/app/conf/htpasswd
 require valid-user

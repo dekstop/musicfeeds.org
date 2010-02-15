@@ -55,6 +55,63 @@ class AdminController {
     
     $db->close();
   }
+  
+  function feed($request, $view) {
+    
+    $db = getDb();
+    if (!$db) {
+      die("Can't connect to the database."); // TODO show proper error page
+    }
+    $fs = new FeedStore($db);
+    
+    $feedId = $request->getInt('feed_id');
+    $feed = $fs->getFeed($feedId);
+
+    $view->setParam('feed', $feed);    
+    $view->display('admin_feed_info');
+    
+    $db->close();
+  }
+  
+  function activateFeed($request, $view) {
+    global $DISPLAY_VARS;
+    
+    $db = getDb();
+    if (!$db) {
+      die("Can't connect to the database."); // TODO show proper error page
+    }
+    $fs = new FeedStore($db);
+    
+    $feedId = $request->getInt('feed_id');
+    $fs->activateFeed($feedId);
+    
+    $db->close();
+
+    $returnUrl = $request->getString('returnUrl', $DISPLAY_VARS['appUrl'] . 'a/');
+
+    header('Location: ' . $returnUrl);
+    exit;
+  }
+  
+  function deactivateFeed($request, $view) {
+    global $DISPLAY_VARS;
+    
+    $db = getDb();
+    if (!$db) {
+      die("Can't connect to the database."); // TODO show proper error page
+    }
+    $fs = new FeedStore($db);
+    
+    $feedId = $request->getInt('feed_id');
+    $fs->deactivateFeed($feedId);
+    
+    $db->close();
+
+    $returnUrl = $request->getString('returnUrl', $DISPLAY_VARS['appUrl'] . 'a/');
+
+    header('Location: ' . $returnUrl);
+    exit;
+  }
 }
 
 ?>

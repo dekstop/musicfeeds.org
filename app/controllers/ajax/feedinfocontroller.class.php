@@ -13,7 +13,7 @@ class FeedInfoController {
       }
       
       $fs = new FeedStore($db);
-      $feedinfo = $fs->getFeedInfo($url);
+      $feedinfo = $fs->getFeedInfoByUrl($url);
       $db->close();
       
       $view->setParam('data', $feedinfo);

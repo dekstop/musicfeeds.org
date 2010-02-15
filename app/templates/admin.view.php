@@ -1,4 +1,4 @@
-<?= $view->display('header_subpage')->title($appName->with_subtitle('Admin')) ?>
+<?= $view->display('header_subpage')->appUrl($appUrl)->title($appName->with_subtitle('Admin')) ?>
 
 <style>
 table.log {
@@ -58,11 +58,7 @@ $(document).ready(function(){
 <h1><a href="../"><?= $appName ?></a></h1>
 </div>
 
-<p><a href="#add">Add a Feed</a> 
-  &middot; <a href="#imports">Recent Imports</a> 
-  &middot; <a href="#failures">Failed Updates</a> 
-  &middot; <a href="#updates">Recent Updates</a> 
-  &middot; <a href="#comments">Recent Comments</a></p>
+<?= $view->display('admin_nav')->appUrl($appUrl) ?>
 
 <a name="add"></a>
 <h2>Add a Feed</h2>
@@ -100,7 +96,7 @@ $(document).ready(function(){
 <h2>Failed Updates</h2>
 <table class="log">
 <tr>
-  <th>URL</th>
+  <th>Feed</th>
   <th>Date Added</th>
   <th>Last Fetch</th>
   <th>Last Update</th>
@@ -112,7 +108,7 @@ $(document).ready(function(){
 </tr>
 <? foreach ($failedFeeds as $item) { ?>
 <tr class="<?= $item->active->if_equals('t', 'active', 'inactive') ?>">
-  <td class="url"><a href="<?= $item->url ?>"><?= $item->title->excerpt($titleExcerptLen) ?></a></td>
+  <td class="url"><a href="<?= $appUrl ?>a/feed?feed_id=<?= $item->id ?>"><?= $item->title->excerpt($titleExcerptLen) ?></a></td>
   <td class="date"><?= $item->date_added->date('Y-m-d H:i') ?></td>
   <td class="date"><?= $item->date_last_fetched->date('Y-m-d H:i')->default('-') ?></td>
   <td class="date"><?= $item->date_modified->date('Y-m-d H:i') ?></td>
@@ -129,7 +125,7 @@ $(document).ready(function(){
 <h2>Recent Updates</h2>
 <table class="log">
 <tr>
-  <th>URL</th>
+  <th>Feed</th>
   <th>Date Added</th>
   <th>Last Fetch</th>
   <th>Last Update</th>
@@ -141,7 +137,7 @@ $(document).ready(function(){
 </tr>
 <? foreach ($feeds as $item) { ?>
   <tr class="<?= $item->active->if_equals('t', 'active', 'inactive') ?>">
-  <td class="url"><a href="<?= $item->url ?>"><?= $item->title->excerpt($titleExcerptLen) ?></a></td>
+    <td class="url"><a href="<?= $appUrl ?>a/feed?feed_id=<?= $item->id ?>"><?= $item->title->excerpt($titleExcerptLen) ?></a></td>
   <td class="date"><?= $item->date_added->date('Y-m-d H:i') ?></td>
   <td class="date"><?= $item->date_last_fetched->date('Y-m-d H:i')->default('-') ?></td>
   <td class="date"><?= $item->date_modified->date('Y-m-d H:i') ?></td>

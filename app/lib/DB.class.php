@@ -78,6 +78,10 @@ class DB {
     return $this->query($query, $parms);
   }
 
+  public function update($query, $parms=null) {
+    return $this->query($query, $parms);
+  }
+
   // Returns a map where one of each result row's named columns 
   // is used as key, mapped to an array to all rows that contain
   // this key.

@@ -43,7 +43,32 @@ class FeedStore {
       array($num, $offset));
   }
   
-  function getFeedInfo($feedUrl) {
+  function getFeed($feedId) {
+    $result = $this->_db->query('SELECT ' . 
+      $this->_getColumnsAsString(FeedStore::$FEED_COLUMNS) .
+      ' FROM feeds WHERE id=?',
+      array($feedId));
+    if (count($result)>0) {
+      return $result[0];
+    }
+    return null;
+  }
+  
+  function activateFeed($feedId) {
+    return $this->_db->update('UPDATE feeds ' .
+      'SET active=\'t\', fail_count=0 ' .
+      ' WHERE id=?',
+      array($feedId));
+  }
+  
+  function deactivateFeed($feedId) {
+    return $this->_db->update('UPDATE feeds ' .
+      'SET active=\'f\' ' .
+      ' WHERE id=?',
+      array($feedId));
+  }
+  
+  function getFeedInfoByUrl($feedUrl) {
     return $this->_db->query('SELECT ' . 
       $this->_getColumnsAsString(FeedStore::$FEED_COLUMNS) .
       ' FROM feeds WHERE url=? OR actual_url=? ORDER BY id ASC',
