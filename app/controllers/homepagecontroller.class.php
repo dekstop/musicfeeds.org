@@ -4,18 +4,6 @@ class HomepageController {
   
   function index($request, $view) {
     
-    $q = $request->getString('q'); // query
-    $f = $request->getString('f'); // facet
-    $c = $request->getInt('c', 1000); // number of characters per post
-    $n = min( // number of posts per page
-      $request->envVar('display.maxNumItems'), 
-      $request->getInt('n', $request->envVar('display.numQueryResultItems')));
-    $u = $request->getString('lfm:user'); // last.fm user name
-    $m = $request->getInt('m', 2); // max number of consecutive posts by the same blog
-    $a = $request->getInt('a', 35); // max number of Last.fm artists to load
-
-    $lastfmFailed = false;
-
     // setup
     $db = getDb();
     if (!$db) {
@@ -26,49 +14,40 @@ class HomepageController {
       die("Can't connect to Solr."); // TODO: show error page instead
     }
 
-    // lastfm
-    $artists = array();
-    $solr_q = $q;
-    $numEntries = $n;
-    if ($u) {
-      // get last.fm artists
-      $lfm = new LastFm($db, $request->envVar('lastfm.key'));
+    $searchContext = new SearchContext($request);
 
-      $artistScores = $lfm->getTopArtistScores($u);
-      if(is_null($artistScores) || count($artistScores)==0) {
-        $lastfmFailed = true;
-      }
-      else {
-        $corpus = new Corpus();
-        $corpus->add($artistScores);
-        $artists = $corpus->getRandom($a);  
-        $solr_q = buildFilteredSolrQuery($q, array('title', 'category'), $artists);
-      }
+    // Last.fm
+    $artists = array();
+    if ($searchContext->hasLastfmUser()) {
+      $lfm = new LastfmService($db, $request->envVar('lastfm.key'));
+      $artists = $lfm->getArtists($searchContext->getLastfmUser(), $searchContext->getA());
     }
 
-    $lowerOpacity = FALSE;
-    if ((empty($q) && empty($u)) || // no query at all
-      $lastfmFailed ||  // could not load last.fm data
-      (empty($q) && !empty($u) && count($artists)==0)) { // no query, empty lastfm result
+    // page type
+    $showHomepage = FALSE;
+    if (!$searchContext->isComplete() || // no query provided?
+      ($searchContext->hasLastfmUser() && 
+        (is_null($artists) || count($artists)==0))) {// could not load last.fm data?
 
-      // no query -> show default search
-      $numEntries = $request->envVar('display.numHomepageItems');
-      $lowerOpacity = TRUE;
+      // show default search
+      $searchContext->setN($request->envVar('display.numHomepageItems'));
+      $showHomepage = TRUE;
     }
 
     // query
-    $entries = find_entries($db, $solr, $solr_q, $f, $request->envVar('feedcache.user'), $numEntries, $m);
+    $searchService = new SearchService($db, $solr);
+    if ($showHomepage) {
+      $entries = $searchService->defaultSearch($searchContext, $request->envVar('feedcache.user'));
+    }
+    else {
+      $entries = $searchService->filteredSearch($searchContext, $request->envVar('feedcache.user'), $artists);
+    }
     
     // display
-    $view->setParam('q', $q);
-    $view->setParam('f', $f);
-    $view->setParam('c', $c);
-    $view->setParam('n', $n);
-    $view->setParam('lfmUser', $u);
+    $view->setParam('search', $searchContext);
     $view->setParam('entries', $entries);
-    $view->setParam('lastfmFailed', $lastfmFailed);
-    $view->setParam('lowerOpacity', $lowerOpacity);
     $view->setParam('artists', $artists);
+    $view->setParam('showHomepage', $showHomepage);
     
     $view->display('homepage');
     

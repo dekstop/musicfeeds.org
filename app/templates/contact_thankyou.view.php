@@ -1,4 +1,4 @@
-<? $title=new Property('Contact'); include('header_subpage.view.php') ?>
+<?= $view->display('header_subpage')->title($appName->with_subtitle('Contact')) ?>
 
 <div id="content">
 <div id="header">
@@ -13,4 +13,4 @@
 
 </div>
 
-<? include('footer.view.php') ?>
+<?= $view->display('footer') ?>

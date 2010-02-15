@@ -1,4 +1,4 @@
-<? $title=new Property('About'); include('header_subpage.view.php') ?>
+<?= $view->display('header_subpage')->title($appName->with_subtitle('About')) ?>
 
 <div id="content">
 <div id="header">
@@ -22,4 +22,4 @@
 <p>We make no uptime guarantees, and may decide to stop operating the service at any time.</p>
 </div>
 
-<? include('footer.view.php') ?>
+<?= $view->display('footer') ?>

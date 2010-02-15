@@ -1,4 +1,10 @@
-<? include('atom_header.view.php') ?>
+<?= $view->display('atom_header', 
+  array(
+    'title' => $appName->with_subtitle($search->lastfmUser . " " . $search->q),
+    'linkUrl' => buildSearchUrl($search),
+    'selfUrl' => buildSearchUrl($search, $appUrl . 'feed/'),
+    'date' => $now
+  )) ?>
 
 <? foreach ($entries as $entry) { ?>
 <entry>
@@ -28,4 +34,4 @@
 </entry>
 <? } ?>
 
-<? include('atom_footer.view.php') ?>
+<?= $view->display('atom_footer') ?>

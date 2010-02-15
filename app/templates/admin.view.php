@@ -1,4 +1,4 @@
-<? $title=new Property('Admin'); include('header_subpage.view.php') ?>
+<?= $view->display('header_subpage')->title($appName->with_subtitle('Admin')) ?>
 
 <style>
 table.log {
@@ -177,4 +177,4 @@ $(document).ready(function(){
 
 </div>
 
-<? include('footer.view.php') ?>
+<?= $view->display('footer') ?>

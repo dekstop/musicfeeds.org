@@ -1,4 +1,4 @@
-<? $title=new Property('Sources'); include('header_subpage.view.php') ?>
+<?= $view->display('header_subpage')->title($appName->with_subtitle('Sources')) ?>
 
 <div id="content">
 <div id="header">
@@ -25,4 +25,4 @@ Active: <?= $feed->active ?><br/>
 
 </div>
 
-<? include('footer.view.php') ?>
+<?= $view->display('footer') ?>

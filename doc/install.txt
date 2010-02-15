@@ -15,6 +15,7 @@
  ================
 
 Setup
+- check out git://github.com/dekstop/view.git to ./external/view
 - rename ./app/conf/app_env.php.example to app_env.php, edit settings (DB, Solr, etc)
 - rename ./app/conf/display_vars.php.example to display_vars.php, edit settings (display strings)
 

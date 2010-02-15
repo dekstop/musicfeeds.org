@@ -53,7 +53,7 @@ class Solr {
   }
 
   public static function quoteTerm($str) {
-    if (0==preg_match('/^[a-zA-Z]+$/', $str)) { // not just roman alphabet?
+    if (0==preg_match('/^[a-zA-Z0-9]+$/', $str)) { // not just roman alphabet?
       return '"' . preg_replace('/"/', ' ', $str) . '"';
     }
     return $str;

@@ -6,7 +6,7 @@
 $DISPLAY_VARS = array(
 
   'appName' => 'Music Feeds',
-  'appUrl' => 'http://musicfeeds.screamorap.org/',
+  'appUrl' => 'http://musicfeeds.screamorap.org/', // expected to have a trailing slash
 
 );
 

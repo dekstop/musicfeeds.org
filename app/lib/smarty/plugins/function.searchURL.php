@@ -28,8 +28,8 @@ function smarty_function_searchURL($params, $smarty, $template)
   if ($f = _extract_param($params, 'f')) {
     $url .= '&f=' . formatFacets($f);
   }
-  if ($lfmUser = _extract_param($params, 'lfmUser')) {
-    $url .= '&lfm%3Auser=' . urlencode($lfmUser);
+  if ($lastfmUser = _extract_param($params, 'lastfmUser')) {
+    $url .= '&lfm%3Auser=' . urlencode($lastfmUser);
   }
   
   // and any additional parameters provided:

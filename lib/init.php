@@ -15,7 +15,7 @@ $PKG_LIB = $base_dir . '/lib';
 $PKG_VAR = $base_dir . '/var';
 
 # Global includes: externals
-require_once('View.php');
+require_once('view/lib/View.php');
 
 # Global includes: own
 require_once('Request.class.php');

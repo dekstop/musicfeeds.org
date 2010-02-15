@@ -113,11 +113,12 @@ class LastFm {
       $artists = $this->_fetchTopArtistRecords($username, $chartType);
       if (!is_array($artists)) {
         // failed to load -> return null/error
-        return null;
+        return FALSE;
       }
-      if (count(!$artists) > 0) {
+      if (count($artists) > 0) {
         $this->_storeTopArtistRecords($username, $chartType, $artists);
       }
+      return TRUE;
     }
   }
 
@@ -125,8 +126,9 @@ class LastFm {
    * Returns null in case of an error, or a map of artist names and playcounts.
    */
   function getTopArtistScores($username, $chartType=LastFm::DEFAULT_CHARTTYPE, $limit=null) {
-    $this->_prefetchTopArtists($username, $chartType, $limit);
+    $prefetchSucceeded = $this->_prefetchTopArtists($username, $chartType, $limit);
 
+    // even if the above fails we'll try to load from local cache
     $query = "SELECT a.name AS name, a.playcount AS playcount " .
       "FROM musicfeeds_lastfm_usercharts u " .
       "INNER JOIN musicfeeds_lastfm_userchart_artists a ON u.id=a.lastfm_user_id " .
@@ -140,6 +142,10 @@ class LastFm {
       $parameters[] = $limit;
     }
     $select = $this->_db->query($query, $parameters);
+    
+    if (!$prefetchSucceeded && count($select)==0) {
+      return null; // Last.fm user probably does not exist
+    }
     $result = array();
     foreach ($select as $row) {
       $result[$row['name']] = $row['playcount'];
