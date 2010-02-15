@@ -1,8 +1,6 @@
 2010-01-03 03:20:01
 
 View.php impl:
-- initial form variables are set to homepage defaults -> n=10 gets carried over when it shouldn't be.
-  -> implement similar defaults handling for forms as for SearchContext::buildUrl()
 - get rid of all x->raw() calls in templates
 - TODO: unit tests for custom View.php renderers
 - TODO: HTML::sanitise/excerpt in combination with View.php means we double(/triple?)-escape HTML entities

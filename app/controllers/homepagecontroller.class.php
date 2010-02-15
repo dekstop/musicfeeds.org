@@ -30,14 +30,17 @@ class HomepageController {
         (is_null($artists) || count($artists)==0))) {// could not load last.fm data?
 
       // show default search
-      $searchContext->setN($request->envVar('display.numHomepageItems'));
       $showHomepage = TRUE;
     }
 
     // query
     $searchService = new SearchService($db, $solr);
     if ($showHomepage) {
+      // temporarily override how many entries we display, just for this search
+      $n = $searchContext->getN();
+      $searchContext->setN($request->envVar('display.numHomepageItems'));
       $entries = $searchService->defaultSearch($searchContext, $request->envVar('feedcache.user'));
+      $searchContext->setN($n);
     }
     else {
       $entries = $searchService->filteredSearch($searchContext, $request->envVar('feedcache.user'), $artists);
