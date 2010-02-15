@@ -1,7 +1,7 @@
 <?= $view->display('atom_header', 
   array(
     'title' => $appName->with_subtitle($search->lastfmUser . " " . $search->q),
-    'linkUrl' => buildSearchUrl($search),
+    'linkUrl' => buildSearchUrl($search, $appUrl),
     'selfUrl' => buildSearchUrl($search, $appUrl . 'feed/'),
     'date' => $now
   )) ?>

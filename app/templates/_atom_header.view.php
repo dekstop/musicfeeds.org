@@ -4,5 +4,5 @@
   <link href="<?= $linkUrl ?>"/>
   <link rel="self" href="<?= $selfUrl ?>"/>
   <updated><?= $date->date('Y-m-d\\TH:i:s\\Z') ?></updated>
-  <id><?= $linkUrl ?></id>
+  <id><?= $selfUrl ?></id>
   <generator>MicroLink 5.6</generator>
