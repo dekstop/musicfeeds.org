@@ -1,10 +1,11 @@
 <?
 
-function filename_renderer($property, $args) {
-  if ($property->is_null() || $property->is_empty_string() || strrpos($property, '/')===FALSE) {
+function filename_renderer($property, $encoder, $args) {
+  if ($property->is_null() || $property->is_empty_string() || strrpos($property->raw(), '/')===FALSE) {
     return $property;
   }
-  return urldecode(substr($property, strrpos($property, '/') + 1));
+  $p = Sandbox::unwrap($property);
+  return Sandbox::wrap(urldecode(substr($p, strrpos($p, '/') + 1)), $encoder);
 }
 
 ?>

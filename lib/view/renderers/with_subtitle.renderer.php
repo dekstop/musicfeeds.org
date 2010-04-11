@@ -1,23 +1,23 @@
 <?
 require_once('HTML.class.php');
 
-function with_subtitle_renderer($property, $args) {
+function with_subtitle_renderer($property, $encoder, $args) {
   if (count($args)!=1 && count($args)!=2) throw new Exception('Function requires one or two parameters. Provided: ' . count($args));
   
-  $title = $property;
-  $subtitle = SandBox::wrap($args[0]);  // allow strings and Properties as input
+  $title = SandBox::unwrap($property);
+  $subtitle = SandBox::unwrap($args[0]);  // allow strings and Properties as input
   if (count($args)==2) {
-    $separator = SandBox::wrap($args[1]); // allow strings and Properties as input
+    $separator = SandBox::unwrap($args[1]); // allow strings and Properties as input
   }
   else {
-    $separator = SandBox::wrap(' – ');
+    $separator = ' – ';
   }
 
   // return raw values to prevent double-escaping:
-  if ($subtitle->is_empty()) {
-    return $title->raw();
+  if (is_null($subtitle) || $subtitle=='') {
+    return Sandbox::wrap($title, $encoder);
   }
-  return $title->raw() . $separator->raw() . $subtitle->raw();
+  return Sandbox::wrap($title . $separator . $subtitle, $encoder);
 }
 
 ?>
