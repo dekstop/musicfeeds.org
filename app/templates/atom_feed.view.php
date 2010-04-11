@@ -15,13 +15,15 @@
   <updated><?= $entry->date->date('Y-m-d\\TH:i:s\\Z') ?></updated>
 
   <? if ($entry->authors->is_array() && $entry->authors->count() > 0) { ?>
-  <author><name><?= $entry->authors->implode('</name> <name>') ?></name></author>
+  <author>
+  <? foreach ($entry->authors as $author) { ?><name><?= $author ?></name><? } ?>
+  </author>
   <? } else {?>
   <author><name>Unknown</name></author>
   <? } ?>
 
   <? if ($entry->categories->is_array() && $entry->categories->count() > 0) { ?>
-  <category term="<?= $entry->categories->implode('" /><category term="') ?>" />
+  <? foreach ($entry->categories as $category) { ?><category term="<?= $category ?>" /><? } ?>
   <? } ?>
 
   <content type="html"><?= $entry->content->sanitise()->raw() ?></content>
