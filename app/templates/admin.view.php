@@ -64,8 +64,8 @@ $(document).ready(function(){
 <h2>Add a Feed</h2>
 
 <form action="." method="post">
-<p>Feed URL: <input type="text" name ="feed_url" id="feed_url" value="<?= $feedUrl ?>" onchange="getFeedInfo(this.value)"/> <input type="submit" value="Send" /> <span id="spinner"></span></p> 
-<p>Username: <input type="text" name ="user" value="<?= $user ?>" /></p>
+<p>Feed URL: <input type="text" name ="feed_url" id="feed_url" value="<?= $feedUrl->default('') ?>" onchange="getFeedInfo(this.value)"/> <input type="submit" value="Send" /> <span id="spinner"></span></p> 
+<p>Username: <input type="text" name ="user" value="<?= $user->default('') ?>" /></p>
 </form>
 
 <a name="imports"></a>

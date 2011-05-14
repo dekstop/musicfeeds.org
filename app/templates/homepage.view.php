@@ -14,12 +14,12 @@
 <p class="error">Sorry, but Last.fm user <a href="http://last.fm/user/<?= $search->lastfmUser ?>"><?= $search->lastfmUser ?></a> does not seem to have any scrobbles.</p>
 <? } ?>
 <p>Your Last.fm user name:
-<input type="text" class="i_lfm" name="lfm:user" value="<?= $search->lastfmUser ?>" /></p>
+<input type="text" class="i_lfm" name="lfm:user" value="<?= $search->lastfmUser->default('') ?>" /></p>
 <p>Optional filter:
-<input type="text" class="i_filter" name="q" value="<?= $search->q ?>" />
-<input type="hidden" name="f" value="<?= $search->f ?>" />
-<input type="hidden" name="c" value="<?= $search->c ?>" />
-<input type="hidden" name="n" value="<?= $search->n ?>" /></p>
+<input type="text" class="i_filter" name="q" value="<?= $search->q->default('') ?>" />
+<input type="hidden" name="f" value="<?= $search->f->default('') ?>" />
+<input type="hidden" name="c" value="<?= $search->c->default('') ?>" />
+<input type="hidden" name="n" value="<?= $search->n->default('') ?>" /></p>
 <p><input type="submit"/></p>
 </form>
 <p><a href="./about/">About</a>, <a href="./contact/">Contact</a>.</p>
