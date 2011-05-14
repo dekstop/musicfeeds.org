@@ -55,6 +55,9 @@ a img {
   margin-bottom: -5px;
   padding: 2em 5em 2em 2em;
 }
+.item .content img {
+  max-width: 550px;
+}
 .item .footer {
   margin-top: 2em;
 }
